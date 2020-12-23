@@ -1,5 +1,8 @@
 .metals
 .bloop
+.bsp
+.vscode
+project/metals.sbt
 
 logs
 project/project

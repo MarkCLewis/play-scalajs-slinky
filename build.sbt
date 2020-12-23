@@ -1,6 +1,7 @@
 import sbtcrossproject.{crossProject, CrossType}
 
 lazy val server = (project in file("server")).settings(commonSettings).settings(
+	name := "play-server",
   scalaJSProjects := Seq(client),
   pipelineStages in Assets := Seq(scalaJSPipeline),
   pipelineStages := Seq(digest, gzip),
@@ -9,26 +10,25 @@ lazy val server = (project in file("server")).settings(commonSettings).settings(
   libraryDependencies ++= Seq(
     "com.vmunier" %% "scalajs-scripts" % "1.1.2",
     guice,
-		"org.scalatestplus.play" %% "scalatestplus-play" % "5.0.0" % Test,
+		"org.scalatestplus.play" %% "scalatestplus-play" % "5.1.0" % Test,
 		"com.typesafe.play" %% "play-slick" % "5.0.0",
-		"com.typesafe.slick" %% "slick-codegen" % "3.3.2",
-		"com.typesafe.play" %% "play-json" % "2.8.1",
+		"com.typesafe.slick" %% "slick-codegen" % "3.3.3",
+		"com.typesafe.play" %% "play-json" % "2.9.1",
     specs2 % Test
-  ),
-  // Compile the project before generating Eclipse files, so that generated .scala or .class files for views and routes are present
-  EclipseKeys.preTasks := Seq(compile in Compile)
+  )
 ).enablePlugins(PlayScala).
   dependsOn(sharedJvm)
 
 lazy val client = (project in file("client")).settings(commonSettings).settings(
+	name := "play-client",
   scalaJSUseMainModuleInitializer := true,
   libraryDependencies ++= Seq(
-    "org.scala-js" %%% "scalajs-dom" % "0.9.5",
-		"me.shadaj" %%% "slinky-core" % "0.6.3",
-		"me.shadaj" %%% "slinky-web" % "0.6.3",
-		"com.typesafe.play" %% "play-json" % "2.8.1"
+    "org.scala-js" %%% "scalajs-dom" % "1.1.0",
+		"me.shadaj" %%% "slinky-core" % "0.6.6",
+		"me.shadaj" %%% "slinky-web" % "0.6.6",
+		"com.typesafe.play" %% "play-json" % "2.9.1"
   ),
-	scalacOptions += "-P:scalajs:sjsDefinedByDefault"
+	addCompilerPlugin("org.scalamacros" % "paradise" % "2.1.1" cross CrossVersion.full)
 ).enablePlugins(ScalaJSPlugin, ScalaJSWeb).
   dependsOn(sharedJs)
 
@@ -36,11 +36,15 @@ lazy val shared = crossProject(JSPlatform, JVMPlatform)
   .crossType(CrossType.Pure)
   .in(file("shared"))
   .settings(commonSettings)
+	.settings(
+		name := "play-shared",
+		libraryDependencies += "com.typesafe.play" %% "play-json" % "2.9.1"
+	)
 lazy val sharedJvm = shared.jvm
 lazy val sharedJs = shared.js
 
 lazy val commonSettings = Seq(
-  scalaVersion := "2.12.10",
+  scalaVersion := "2.12.12",
   organization := "edu.trinity"
 )
 
