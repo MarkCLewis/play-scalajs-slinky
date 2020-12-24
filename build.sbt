@@ -13,7 +13,6 @@ lazy val server = (project in file("server")).settings(commonSettings).settings(
 		"org.scalatestplus.play" %% "scalatestplus-play" % "5.1.0" % Test,
 		"com.typesafe.play" %% "play-slick" % "5.0.0",
 		"com.typesafe.slick" %% "slick-codegen" % "3.3.3",
-		"com.typesafe.play" %% "play-json" % "2.9.1",
     specs2 % Test
   )
 ).enablePlugins(PlayScala).
@@ -25,8 +24,7 @@ lazy val client = (project in file("client")).settings(commonSettings).settings(
   libraryDependencies ++= Seq(
     "org.scala-js" %%% "scalajs-dom" % "1.1.0",
 		"me.shadaj" %%% "slinky-core" % "0.6.6",
-		"me.shadaj" %%% "slinky-web" % "0.6.6",
-		"com.typesafe.play" %% "play-json" % "2.9.1"
+		"me.shadaj" %%% "slinky-web" % "0.6.6"
   ),
 	addCompilerPlugin("org.scalamacros" % "paradise" % "2.1.1" cross CrossVersion.full)
 ).enablePlugins(ScalaJSPlugin, ScalaJSWeb).
@@ -37,15 +35,15 @@ lazy val shared = crossProject(JSPlatform, JVMPlatform)
   .in(file("shared"))
   .settings(commonSettings)
 	.settings(
-		name := "play-shared",
-		libraryDependencies += "com.typesafe.play" %% "play-json" % "2.9.1"
+		name := "play-shared"
 	)
 lazy val sharedJvm = shared.jvm
 lazy val sharedJs = shared.js
 
 lazy val commonSettings = Seq(
   scalaVersion := "2.12.12",
-  organization := "edu.trinity"
+  organization := "edu.trinity",
+	libraryDependencies += "com.typesafe.play" %% "play-json" % "2.9.1"
 )
 
 // loads the server project at sbt startup
