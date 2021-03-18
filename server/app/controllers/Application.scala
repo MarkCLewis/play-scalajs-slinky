@@ -1,8 +1,8 @@
-package edu.trinity.videoquizreact.controllers
+package controllers
 
 import javax.inject._
 
-import edu.trinity.videoquizreact.shared.SharedMessages
+import shared.SharedMessages
 import play.api.mvc._
 
 @Singleton
