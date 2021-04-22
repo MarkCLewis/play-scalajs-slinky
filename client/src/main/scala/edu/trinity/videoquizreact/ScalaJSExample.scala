@@ -16,6 +16,5 @@ object ScalaJSExample {
       h1("Hello, world!"),
       dom.document.getElementById("root")
     )
-
   }
 }

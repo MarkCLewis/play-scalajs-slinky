@@ -26,13 +26,13 @@ lazy val server = (project in file("server")).settings(commonSettings).settings(
 
 lazy val client = (project in file("client")).settings(commonSettings).settings(
 	name := "play-client",
+  scalacOptions += "-Ymacro-annotations",
   scalaJSUseMainModuleInitializer := true,
   libraryDependencies ++= Seq(
     "org.scala-js" %%% "scalajs-dom" % "1.1.0",
 		"me.shadaj" %%% "slinky-core" % "0.6.6",
 		"me.shadaj" %%% "slinky-web" % "0.6.6"
-  ),
-  scalacOptions += "-Ymacro-annotations"
+  )
 ).enablePlugins(ScalaJSPlugin, ScalaJSWeb).
   dependsOn(sharedJs)
 
@@ -49,7 +49,7 @@ lazy val sharedJs = shared.js
 lazy val commonSettings = Seq(
   scalaVersion := "2.13.4",
   organization := "edu.trinity",
-	libraryDependencies += "com.typesafe.play" %% "play-json" % "2.9.1"
+  libraryDependencies += "com.typesafe.play" %%% "play-json" % "2.9.1"
 )
 
 // loads the server project at sbt startup
