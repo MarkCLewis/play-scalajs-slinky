@@ -9,7 +9,7 @@ ThisBuild / libraryDependencySchemes ++= Seq(
 resolvers += "Typesafe repository" at "https://repo.typesafe.com/typesafe/releases/"
 
 // Sbt plugins
-addSbtPlugin("com.typesafe.sbt" % "sbt-native-packager" % "1.5.0")
+addSbtPlugin("com.typesafe.sbt" % "sbt-native-packager" % "1.8.1")
 
 addSbtPlugin("com.vmunier"               % "sbt-web-scalajs"           % "1.2.0")
 addSbtPlugin("org.scala-js"              % "sbt-scalajs"               % "1.13.2")
