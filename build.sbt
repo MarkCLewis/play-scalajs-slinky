@@ -23,6 +23,10 @@ lazy val server = (project in file("server")).settings(commonSettings).settings(
     "com.typesafe.slick" %% "slick-hikaricp" % "3.4.1",
     specs2 % Test
   ),
+  Test / javaOptions ++= Seq(
+    "--add-exports=java.base/sun.security.x509=ALL-UNNAMED",
+    "--add-opens=java.base/sun.security.ssl=ALL-UNNAMED" // Could be needed as well in some cases
+  ),
 ).enablePlugins(PlayScala).
   dependsOn(sharedJvm)
 
