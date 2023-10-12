@@ -6,6 +6,7 @@ Global / onChangedBuildSource := ReloadOnSourceChanges
 
 lazy val server = (project in file("server")).settings(commonSettings).settings(
 	name := "play-server",
+  version := "0.1.0",
   scalaJSProjects := Seq(client),
   Assets / pipelineStages := Seq(scalaJSPipeline),
   pipelineStages := Seq(digest, gzip),
