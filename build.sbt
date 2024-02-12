@@ -17,10 +17,10 @@ lazy val server = (project in file("server")).settings(commonSettings).settings(
     "com.google.inject"            % "guice"                % "6.0.0",
     "com.google.inject.extensions" % "guice-assistedinject" % "6.0.0",
     guice,
-		"org.scalatestplus.play" %% "scalatestplus-play" % "5.1.0" % Test,
-		"com.typesafe.play" %% "play-slick" % "5.1.0",
+		"org.scalatestplus.play" %% "scalatestplus-play" % "7.0.1" % Test,
+    "org.playframework" %% "play-slick" % "6.0.0",
 		"com.typesafe.slick" %% "slick-codegen" % "3.4.1",
-    "org.postgresql" % "postgresql" % "42.6.0",
+    "org.postgresql" % "postgresql" % "42.7.1",
     "com.typesafe.slick" %% "slick-hikaricp" % "3.4.1",
     specs2 % Test
   ),
@@ -36,7 +36,7 @@ lazy val client = (project in file("client")).settings(commonSettings).settings(
   scalacOptions += "-Ymacro-annotations",
   scalaJSUseMainModuleInitializer := true,
   libraryDependencies ++= Seq(
-    "org.scala-js" %%% "scalajs-dom" % "2.6.0",
+    "org.scala-js" %%% "scalajs-dom" % "2.8.0",
 		"me.shadaj" %%% "slinky-core" % "0.7.4",
 		"me.shadaj" %%% "slinky-web" % "0.7.4"
   )
@@ -54,9 +54,10 @@ lazy val sharedJvm = shared.jvm
 lazy val sharedJs = shared.js
 
 lazy val commonSettings = Seq(
-  scalaVersion := "2.13.11",
+  scalaVersion := "2.13.12",
   organization := "edu.trinity",
-  libraryDependencies += "com.typesafe.play" %%% "play-json" % "2.9.4"
+  libraryDependencies += "org.playframework" %% "play-json" % "3.0.2"
+
 )
 
 // loads the server project at sbt startup

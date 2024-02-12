@@ -10,10 +10,16 @@ import slinky.web.html._
 object ScalaJSExample {
 
   def main(args: Array[String]): Unit = {
-    // dom.document.getElementById("scalajsShoutOut").textContent = SharedMessages.itWorks
+    // This line demonstrates using Scala.js to modify the DOM.
+    dom.document.getElementById("scalajsShoutOut").textContent = SharedMessages.itWorks
+
+    // What is below is using Scala.js with Slinky to use React.
     println("Call the react stuff.")
     ReactDOM.render(
-      h1("Hello, world!"),
+      div(
+        h1("Hello, world!"),
+        p("This is a component added with Slinky, a Scala.js React binding.")
+      ),
       dom.document.getElementById("root")
     )
   }
